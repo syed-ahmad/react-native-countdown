@@ -1,5 +1,3 @@
-import React from 'react';
-import { View } from 'react-native';
 import EventList from './EventList';
 import EventForm from './EventForm';
 import { StackNavigator } from 'react-navigation';
