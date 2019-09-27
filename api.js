@@ -1,4 +1,24 @@
 import moment from 'moment';
+import Constants from 'expo-constants';
+
+const { manifest } = Constants;
+const api = manifest.packagerOpts.dev
+  ? manifest.debuggerHost
+      .split(`:`)
+      .shift()
+      .concat(`:3000`)
+  : `api.example.com`;
+
+// const url = `http://${api}/events`;
+const url = `http://localhost:3000/events`;
+
+console.log('Expo url', url);
+export function getEvents() {
+  return fetch(url)
+    .then(response => response.json())
+    .then(events => events.map(e => ({ ...e, date: new Date(e.date) })))
+    .catch(err => console.log('GetEvents error', err));
+}
 
 export function formatDateTime(dateString) {
   const parsed = moment(new Date(dateString));
